@@ -1,6 +1,6 @@
 package com.dealz.registration.handler;
 
-import javax.servlet.http.HttpServletRequest;
+//import javax.servlet.http.HttpServletRequest;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -18,6 +18,7 @@ import com.dealz.registration.helper.Status;
 import com.dealz.registration.service.RegistrationService;
 
 @Controller
+@RequestMapping("/user")
 public class MVCController {
 
 	private static final Logger logger = LoggerFactory.getLogger(MVCController.class);
@@ -38,34 +39,13 @@ public class MVCController {
 	}
 	
 	
-	@RequestMapping(value="/hellos/{name}", method=RequestMethod.GET)  
+	@RequestMapping(value="/{name}", method=RequestMethod.GET)  
 	 public @ResponseBody  
 	 User getStudent1(@PathVariable("name") String name) {  
-	  return new User(name, "meghna@gmail.com");
+	  return new User(name, "vamshi1252@gmail.com");
 	 }  
-	
 
-//	@RequestMapping(value = "createUser", method=RequestMethod.POST)  
-//	 public @ResponseBody  
-//	 Status createUser(HttpServletRequest request) {
-//		 try {
-//			 String uuid = request.getParameter("uuid");
-//			 String fname = request.getParameter("fname");
-//			 String lname = request.getParameter("lname");
-//			 
-//			 UserProfile userProfile = new UserProfile();
-//			 userProfile.setUuid(uuid);
-//			 userProfile.setFname(fname);
-//			 userProfile.setLname(lname);
-//			String mesg = registrationService.createUser(userProfile);
-//			return new Status(mesg); 
-//		} catch (Exception ex) {
-//			logger.error("Exception while creating User",ex);
-//			return new Status(ex.getMessage());
-//		}
-//	 }  
-
-	@RequestMapping(value = "createUser", method=RequestMethod.POST, consumes="application/json")  
+	@RequestMapping(value = "/create", method=RequestMethod.POST, consumes="application/json")  
 	 public @ResponseBody  
 	 Status createUser(@RequestBody UserProfile userProfile) {
 		 try {
@@ -77,7 +57,7 @@ public class MVCController {
 		}
 	 }  
 	
-	@RequestMapping(value = "getUser/{id}", method=RequestMethod.GET)  
+	@RequestMapping(value = "/get/{id}", method=RequestMethod.GET)  
 	 public @ResponseBody  
 	 UserProfile getUser(@PathVariable("id") String id) {
 		 try {
@@ -88,12 +68,5 @@ public class MVCController {
 		 
 		 return null;
 	 }  
-	
-	
-//	@RequestMapping(value = "/user/{id}", method=RequestMethod.GET)  
-//	 public @ResponseBody  
-//	 UserProfile getStudent(@PathVariable("id") String id) {
-//		return registrationService.getUser(id);
-//	 }  
 
 }
